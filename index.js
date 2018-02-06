@@ -7,37 +7,35 @@ var allHotels = [lakewood, bridgewood, ridgewood]
 
 function formatData(input) {
   var formattedInput = {
-    user: "",
+    user: '',
     dates: []
   }
 
-  formattedInput.user = input.split(": ")[0]
+  formattedInput.user = input.split(': ')[0]
 
-  var date = input.split(": ")[1]
-  var dates = date.split(", ")
+  var dates = input.split(': ')[1].split(', ')
 
   for(var i = 0; i < dates.length; i++) {
-    dates[i] = dates[i].split("(")[0].split("")
-    dates[i].splice(2, 0, " ")
-    dates[i].splice(date[i].length-5, 0, " ")
-    dates[i] = dates[i].join('')
-    formattedInput.dates.push(dates[i])
+    dates[i] = dates[i].split('(')[0].split('')
+    dates[i].splice(2, 0, ' ')
+    dates[i].splice(dates[i].length-4, 0, ' ')
+    formattedInput.dates.push(dates[i].join(''))
   }
   return formattedInput
 }
 
 function checkDate(dates) {
   var getDays = {
-    weekdays: 0,
-    weekends: 0
+    wkdays: 0,
+    wkends: 0
   }
 
   for (var i = 0; i < dates.length; i++) {
-    var date = new Date (dates[i]).getDay()
+    var date = new Date(dates[i]).getDay()
     if (date === 0 || date === 6) {
-      getDays.weekends++
+      getDays.wkends++
     } else {
-      getDays.weekdays++
+      getDays.wkdays++
     }
   }
   return getDays
@@ -55,7 +53,7 @@ function findCheapest(data) {
 }
 
 module.exports = {
-  formatData: formatData,
-  checkDate: checkDate,
-  findCheapest: findCheapest
+  formatData,
+  checkDate,
+  findCheapest
 }
